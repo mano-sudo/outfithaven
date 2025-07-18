@@ -15,7 +15,7 @@ const mockProducts = [
     brand: "Nike",
     name: "Nike Air Max 95 Men's Shoes",
     price: 13383.48,
-    Image: "/images/nike-95-black.png",
+    Image: `${import.meta.env.BASE_URL}images/nike-95-black.png`,
   },
   {
     id: 2,
@@ -23,39 +23,43 @@ const mockProducts = [
     brand: "Nike",
     name: "Nike Air Max 95 Big Bubble",
     price: 13383.48,
-    Image: "/images/nike-airmax-gray.png",
+    Image: `${import.meta.env.BASE_URL}images/nike-airmax-gray.png`,
   },
 ];
 
 const categories = [
   {
     title: "All Collections",
-    image: "/images/collections.jpg",
+    image: `${import.meta.env.BASE_URL}images/collections.jpg`,
     colSpan: "col-span-2 md:col-span-2",
     rowSpan: "",
   },
   {
     title: "Shirts",
-    image: "/images/shirts.jpg",
+    image: `${import.meta.env.BASE_URL}images/shirts.jpg`,
     colSpan: "col-span-1 md:col-span-1 md:row-start-2",
     rowSpan: "md:row-span-2",
   },
   {
     title: "Accessories",
-    image: "/images/accessories.jpg",
+    image: `${import.meta.env.BASE_URL}images/accessories.jpg`,
     colSpan: "col-span-1 md:col-span-1 md:row-start-2",
     rowSpan: "md:row-span-2",
   },
   {
     title: "Cut and Sew",
-    image: "/images/jackets.jpg",
+    image: `${import.meta.env.BASE_URL}images/jackets.jpg`,
     colSpan: "col-span-2 md:col-span-3",
     rowSpan: "md:row-span-2",
   },
 ];
 
 const Products = () => {
-  const images = ["/images/nike.jpg", "/images/adi.jpg", "/images/puma.jpg"];
+  const images = [
+    `${import.meta.env.BASE_URL}images/nike.jpg`,
+    `${import.meta.env.BASE_URL}images/adi.jpg`,
+    `${import.meta.env.BASE_URL}images/puma.jpg`,
+  ];
 
   const [current, setCurrent] = useState(0);
 

@@ -3,7 +3,11 @@ import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 
-const images = ["/images/nike.jpg", "/images/adi.jpg", "/images/puma.jpg"];
+const images = [
+  `${import.meta.env.BASE_URL}images/nike.jpg`,
+  `${import.meta.env.BASE_URL}images/adi.jpg`,
+  `${import.meta.env.BASE_URL}images/puma.jpg`,
+];
 
 const ImageSlider = () => {
   const [current, setCurrent] = useState(0);
