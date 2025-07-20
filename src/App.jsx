@@ -8,6 +8,8 @@ import Shop from "./assets/Pages/Shop";
 import HowToOrder from "./assets/Pages/HowToOrder";
 import Contact from "./assets/Pages/Contact";
 import Touch from "./assets/Components/Touch";
+import Login from "./assets/Pages/Login";
+import Signup from "./assets/Pages/Signup";
 
 const App = () => {
   return (
@@ -55,6 +57,26 @@ const App = () => {
                 {""}
                 {}
                 <Contact />
+              </div>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <div>
+                {""}
+                {}
+                <Login />
+              </div>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <div>
+                {""}
+                {}
+                <Signup />
               </div>
             }
           />

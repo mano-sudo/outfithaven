@@ -40,7 +40,7 @@ const Navbar = () => {
     <nav
       className={`flex justify-between items-center p-4 fixed top-0 left-0 z-30 w-full transition-all duration-300 ${
         isHome && !isScrolled
-          ? "bg-transparent text-white mt-5 md:mt-11 "
+          ? "bg-transparent text-white mt-5 md:mt-6 "
           : "bg-white text-black shadow-md h-[50px]"
       }`}
     >
@@ -110,7 +110,9 @@ const Navbar = () => {
 
       {/* Icons */}
       <div className="flex space-x-4 text-2xl md:mr-10">
-        <CiUser />
+        <Link to={"/login"}>
+          <CiUser className="cursor-pointer" />
+        </Link>
         <CiSearch className="hidden md:flex" />
         <CiShoppingCart />
       </div>

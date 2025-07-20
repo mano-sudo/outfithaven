@@ -5,8 +5,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { HiMinus } from "react-icons/hi2";
 import { FaInstagram } from "react-icons/fa";
-import { AiOutlineMail } from "react-icons/ai";
-import { IoIosArrowForward } from "react-icons/io";
+import { Link, useLocation } from "react-router-dom";
 
 const mockProducts = [
   {
@@ -137,9 +136,11 @@ const Products = () => {
           Philippines, celebrating Filipino style and community.
         </h1>
         <h1 className="flex justify-center items-center">
-          <HiMinus className="text-5xl" />
+          <Link>
+            <HiMinus className="text-5xl" />
+          </Link>
         </h1>
-        <p className="text-center px-3 md:px-72">
+        <p className="text-center px-3 md:px-7">
           Outfit Haven is a home for local Filipino brands—built to showcase
           creativity, culture, and identity through fashion. We celebrate the
           spirit of Filipino streetwear and inspire the next generation through
