@@ -131,7 +131,7 @@ const Products = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-col md:px-20 md:mt-5 tracking-normal">
+      <div className="flex flex-col md:px-80 md:mt-5 tracking-normal">
         <h1 className="text-center text-3xl px-16 mt-5 md:text-3xl font-bold text-gray-800">
           Outfit Haven brings you the best local clothing brands from the
           Philippines, celebrating Filipino style and community.
@@ -139,7 +139,7 @@ const Products = () => {
         <h1 className="flex justify-center items-center">
           <HiMinus className="text-5xl" />
         </h1>
-        <p className="text-center px-3">
+        <p className="text-center px-3 md:px-72">
           Outfit Haven is a home for local Filipino brands—built to showcase
           creativity, culture, and identity through fashion. We celebrate the
           spirit of Filipino streetwear and inspire the next generation through
@@ -157,19 +157,6 @@ const Products = () => {
           <FaInstagram />
           Follow Us
         </button>
-      </div>
-      <div className="flex flex-col items-center justify-center mt-24 md:mt-11">
-        <h1 className="text-2xl font-bold text-gray-700">Newsletter</h1>
-        <p className="text-xs mt-2">Let's keep in touch</p>
-        <span className="flex items-center justify-center gap-4 mt-14 mb-10 border-b-2 border-b-gray-950">
-          <AiOutlineMail className="text-2xl" />
-          <input
-            type="text"
-            placeholder="email@website.com"
-            className="text-xs focus:outline-none pr-10 md:pr-40"
-          />
-          <IoIosArrowForward className="cursor-pointer text-2xl" />
-        </span>
       </div>
     </div>
   );

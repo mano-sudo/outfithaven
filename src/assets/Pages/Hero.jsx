@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { FaArrowLeft } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 
 const images = [
   `${import.meta.env.BASE_URL}images/nike.jpg`,
@@ -30,16 +30,16 @@ const ImageSlider = () => {
       {/* left button*/}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 text-white bg-black/50 p-3 rounded-full hover:bg-black/70"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 text-white"
       >
-        <FaArrowLeft />
+        <IoIosArrowBack className="text-2xl" />
       </button>
       {/* right button */}
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 text-white bg-black/50 p-3 rounded-full hover:bg-black/70"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 text-white"
       >
-        <FaArrowRight />
+        <IoIosArrowForward className="text-2xl" />
       </button>
     </div>
   );

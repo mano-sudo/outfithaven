@@ -5,6 +5,9 @@ import Products from "./assets/Pages/Products";
 import Footer from "./assets/Components/Footer";
 import { Routes, Route } from "react-router-dom";
 import Shop from "./assets/Pages/Shop";
+import HowToOrder from "./assets/Pages/HowToOrder";
+import Contact from "./assets/Pages/Contact";
+import Touch from "./assets/Components/Touch";
 
 const App = () => {
   return (
@@ -35,8 +38,29 @@ const App = () => {
               </div>
             }
           />
+          <Route
+            path="/how-to-order"
+            element={
+              <div>
+                {" "}
+                {/* Add padding on shop page */}
+                <HowToOrder />
+              </div>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <div>
+                {""}
+                {}
+                <Contact />
+              </div>
+            }
+          />
         </Routes>
       </main>
+      <Touch />
       <Footer />
     </div>
   );

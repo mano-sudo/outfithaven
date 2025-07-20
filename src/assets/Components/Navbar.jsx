@@ -38,10 +38,10 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`flex justify-between items-center p-4 fixed top-0 left-0 z-30 w-full transition-colors duration-300 ${
+      className={`flex justify-between items-center p-4 fixed top-0 left-0 z-30 w-full transition-all duration-300 ${
         isHome && !isScrolled
-          ? "bg-transparent text-white"
-          : "bg-white text-black shadow-md"
+          ? "bg-transparent text-white mt-5 md:mt-11 "
+          : "bg-white text-black shadow-md h-[50px]"
       }`}
     >
       <button
@@ -54,14 +54,14 @@ const Navbar = () => {
       </button>
 
       <h1
-        className="text-4xl font-bold ml-4 mt-3"
+        className="text-lg md:text-4xl font-bold ml-8 mt-3"
         style={{ fontFamily: "Condiment" }}
       >
         Outfit Haven
       </h1>
 
       {/* Desktop Menu */}
-      <ul className="hidden md:flex space-x-4">
+      <ul className="hidden md:flex space-x-4 text-xs gap-4">
         <li>
           <Link
             to="/"
@@ -86,10 +86,10 @@ const Navbar = () => {
         </li>
         <li>
           <Link
-            to="/howtoorder"
-            onClick={() => handleClickLink("/howtoorder")}
+            to="/how-to-order"
+            onClick={() => handleClickLink("/how-to-order")}
             className={`transition-transform duration-150 ease-in-out ${
-              clickedLink === "/howtoorder" ? "scale-95" : ""
+              clickedLink === "/how-to-order" ? "scale-95" : ""
             }`}
           >
             How To Order
@@ -109,8 +109,8 @@ const Navbar = () => {
       </ul>
 
       {/* Icons */}
-      <div className="flex space-x-4 text-2xl">
-        <CiUser className="bg-transparent hover:bg-gray-900 hover:text-white duration-300 rounded-full" />
+      <div className="flex space-x-4 text-2xl md:mr-10">
+        <CiUser />
         <CiSearch className="hidden md:flex" />
         <CiShoppingCart />
       </div>
@@ -152,10 +152,10 @@ const Navbar = () => {
         </li>
         <li>
           <Link
-            to="/howtoorder"
-            onClick={() => handleMobileClick("/howtoorder")}
+            to="/how-to-order"
+            onClick={() => handleMobileClick("/how-to-order")}
             className={`flex justify-center items-center transition-transform duration-150 ease-in-out ${
-              clickedLink === "/howtoorder" ? "scale-95" : ""
+              clickedLink === "/how-to-order" ? "scale-95" : ""
             }`}
           >
             How To Order
