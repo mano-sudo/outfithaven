@@ -1,0 +1,87 @@
+import React, { useState } from "react";
+
+const Cart = () => {
+  // Simulated cart state: an array of items. Set to empty to test empty cart.
+  const [cartItems, setCartItems] = useState([]); // Try with 1 item to test full cart
+
+  return (
+    <div className="max-w-xl mx-auto mt-24 p-4 text-center">
+      <h1 className="font-bold text-xl mb-2">Your Shopping Cart</h1>
+
+      {cartItems.length === 0 ? (
+        // Empty cart view
+        <>
+          <p className="text-sm mb-6">
+            It appears that your cart is currently empty!
+          </p>
+          <button className="border border-black px-6 py-2 font-bold">
+            CONTINUE SHOPPING
+          </button>
+        </>
+      ) : (
+        // Non-empty cart view
+        <div className="text-left">
+          <p className="text-sm text-center">
+            Total Items ({cartItems.length})
+          </p>
+
+          {/* Map through cart items */}
+          {cartItems.map((item, index) => (
+            <div key={index} className="border-t pt-4 mt-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-16 h-16 object-cover mr-4"
+                  />
+                  <div>
+                    <h2 className="font-bold">{item.name}</h2>
+                    <p className="text-sm">{item.size}</p>
+                    <p className="text-sm">₱{item.price}</p>
+                  </div>
+                </div>
+                <button className="text-xl font-light">×</button>
+              </div>
+              <div className="flex justify-between items-center mt-4">
+                <p className="text-lg font-medium">₱{item.price}</p>
+                <div className="flex items-center border px-2 py-1">
+                  <button className="px-2">−</button>
+                  <span className="px-2">{item.quantity}</span>
+                  <button className="px-2">+</button>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {/* Subtotal and Buttons */}
+          <div className="border-t mt-6 pt-4">
+            <div className="flex justify-between text-lg font-medium">
+              <span>Subtotal:</span>
+              <span>
+                ₱
+                {cartItems.reduce(
+                  (total, item) => total + item.price * item.quantity,
+                  0
+                )}
+              </span>
+            </div>
+            <p className="text-sm text-gray-500 mt-1">
+              Excluding taxes and shipping
+            </p>
+            <div className="mt-6">
+              <button className="w-full bg-black text-white py-3 font-bold mb-2">
+                CHECKOUT
+              </button>
+              <button className="w-full border border-black py-3 font-bold">
+                CONTINUE SHOPPING
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Cart;

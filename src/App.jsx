@@ -10,11 +10,13 @@ import Contact from "./assets/Pages/Contact";
 import Touch from "./assets/Components/Touch";
 import Login from "./assets/Pages/Login";
 import Signup from "./assets/Pages/Signup";
+import { mockProducts } from "./assets/Components/MockProducts";
+import Cart from "./assets/Pages/Cart";
 
 const App = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar products={mockProducts} />
       <main className="flex-grow">
         <Routes>
           <Route
@@ -77,6 +79,16 @@ const App = () => {
                 {""}
                 {}
                 <Signup />
+              </div>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <div>
+                {""}
+                {}
+                <Cart />
               </div>
             }
           />

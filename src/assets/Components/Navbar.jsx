@@ -6,7 +6,7 @@ import { FaTwitter, FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ products }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [clickedLink, setClickedLink] = useState(null);
@@ -35,6 +35,24 @@ const Navbar = () => {
     handleClickLink(link);
     setIsOpen(false);
   };
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchClick = () => {
+    setShowSearchOverlay(true);
+    setSearchTerm("");
+  };
+
+  const handleSearchClose = () => {
+    setShowSearchOverlay(false);
+    setSearchTerm("");
+  };
+
+  const [showSearchOverlay, setShowSearchOverlay] = useState(false);
+
+  const filteredProducts = products.filter((product) => {
+    return product.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   return (
     <nav
@@ -113,8 +131,10 @@ const Navbar = () => {
         <Link to={"/login"}>
           <CiUser className="cursor-pointer" />
         </Link>
-        <CiSearch className="hidden md:flex" />
-        <CiShoppingCart />
+        <CiSearch onClick={handleSearchClick} className="hidden md:flex" />
+        <Link to="/cart">
+          <CiShoppingCart className="cursor-pointer" />
+        </Link>
       </div>
 
       {/* Mobile Menu */}
@@ -123,12 +143,43 @@ const Navbar = () => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:hidden flex flex-col gap-y-11`}
       >
-        <div className="flex items-center justify-center gap-3 mb-11 mt-11 p-2 border-b-2 border-transparent focus-within:border-b-black">
+        <div className="relative w-full mt-10">
           <input
             type="text"
-            placeholder="Search"
-            className="text-center bg-gray-100 outline-none"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search for products..."
+            className="w-full p-2 rounded border border-gray-300 bg-white text-black outline-none"
           />
+
+          {searchTerm && (
+            <div className="absolute left-0 right-0 mt-1 bg-white border border-gray-200 shadow-lg rounded max-h-60 overflow-y-auto z-50">
+              {filteredProducts.length > 0 ? (
+                filteredProducts.map((product) => (
+                  <Link
+                    key={product.id}
+                    to={`/product/${product.id}`}
+                    onClick={() => {
+                      setSearchTerm("");
+                      setIsOpen(false);
+                    }}
+                    className="flex items-center p-2 hover:bg-gray-100 border-b border-gray-100"
+                  >
+                    <img
+                      src={product.Image}
+                      alt={product.name}
+                      className="w-12 h-12 object-contain mr-3"
+                    />
+                    <span className="text-sm">{product.name}</span>
+                  </Link>
+                ))
+              ) : (
+                <div className="p-2 text-sm text-gray-500 text-center">
+                  No products found.
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <li>
           <Link
@@ -188,6 +239,49 @@ const Navbar = () => {
           <FaInstagram />
         </li>
       </ul>
+      {showSearchOverlay && (
+        <div className="fixed inset-0 bg-white text-black max-h-fit bg-opacity-95 z-50 flex flex-col items-center justify-start pt-20 px-6">
+          <button
+            className="absolute top-8 right-8 text-3xl text-black"
+            onClick={handleSearchClose}
+          >
+            <IoCloseSharp />
+          </button>
+          <input
+            type="text"
+            autoFocus
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search for products..."
+            className="w-full max-w-3xl p-4 text-lg border-b border-black text-center bg-transparent outline-none"
+          />
+          <div className="mt-10 text-black w-full max-w-6xl p-2">
+            <p className="text-center mb-6 text-lg">
+              {searchTerm
+                ? `Results for "${searchTerm}"`
+                : "Start typing to search..."}
+            </p>
+            {/* Dummy results - Replace with your search logic */}
+            {searchTerm && filteredProducts.length > 0 && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {filteredProducts.map((product) => (
+                  <div key={product.id} className="text-center">
+                    <img
+                      src={product.Image}
+                      alt={product.name}
+                      className="w-full object-contain"
+                    />
+                    <p className="mt-2 text-sm">{product.name}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+            {searchTerm && filteredProducts.length === 0 && (
+              <p className="text-center">No products found.</p>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

@@ -1,53 +1,105 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Data:", formData);
+    // Add validation or API call here
+  };
+
   return (
     <div className="mt-24">
-      <h1 className="text-center text-2xl px-16 font-bold">
-        Register Your Account
-      </h1>
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-center mt-5">
-        <div className="flex flex-col w-80 md:w-[260px]">
-          <label htmlFor="firtName" className="text-sm mb-1">
-            First Name
-          </label>
-          <input
-            id="firstName"
-            type="text"
-            className="text-xs focus:outline-none border h-11 md:h-8 border-gray-400 p-2 py-[4px]"
-          />
+      <h1 className="text-center text-2xl font-bold">Register Your Account</h1>
+
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center mt-10 space-y-4"
+      >
+        {/* Row 1: First & Last Name */}
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col w-80 md:w-[260px]">
+            <label htmlFor="firstName" className="text-sm mb-1">
+              First Name
+            </label>
+            <input
+              id="firstName"
+              name="firstName"
+              type="text"
+              value={formData.firstName}
+              onChange={handleChange}
+              className="border border-gray-400 p-2 text-sm focus:outline-none h-11"
+            />
+          </div>
+          <div className="flex flex-col w-80 md:w-[260px]">
+            <label htmlFor="lastName" className="text-sm mb-1">
+              Last Name
+            </label>
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              value={formData.lastName}
+              onChange={handleChange}
+              className="border border-gray-400 p-2 text-sm focus:outline-none h-11"
+            />
+          </div>
         </div>
-        <div className="flex flex-col w-80 md:w-[260px]">
-          <p>Last Name</p>
-          <input
-            type="text"
-            className="text-xs focus:outline-none border h-11 md:h-8 border-gray-400 p-2 py-[4px]"
-          />
+
+        {/* Row 2: Email & Password */}
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col w-80 md:w-[260px]">
+            <label htmlFor="email" className="text-sm mb-1">
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="border border-gray-400 p-2 text-sm focus:outline-none h-11"
+            />
+          </div>
+          <div className="flex flex-col w-80 md:w-[260px]">
+            <label htmlFor="password" className="text-sm mb-1">
+              Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="border border-gray-400 p-2 text-sm focus:outline-none h-11"
+            />
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col justify-center items-center md:flex-row gap-4 mt-4">
-        <div className="flex flex-col  w-80 md:w-[260px]">
-          <p>Email</p>
-          <input
-            type="text"
-            className="text-xs focus:outline-none border h-11 md:h-8 border-gray-400 p-2 py-[4px]"
-          />
-        </div>
-        <div className="flex flex-col w-80 md:w-[260px]">
-          <p>password</p>
-          <input
-            type="password"
-            className="text-xs focus:outline-none border h-11 md:h-8 border-gray-400 p-2 py-[4px]"
-          />
-        </div>
-      </div>
-      <div className="flex flex-col justify-center items-center gap-2">
-        <button className="text-center bg-black text-white w-80 h-11 mt-8 hover:bg-gray-800">
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="bg-black text-white w-80 md:w-28 h-8 mt-11 hover:bg-gray-800"
+        >
           Submit
         </button>
-        <Link to="/">Cancel</Link>
-      </div>
+
+        {/* Cancel Link */}
+        <Link to="/" className="text-sm text-black hover:underline mt-1">
+          Cancel
+        </Link>
+      </form>
     </div>
   );
 };

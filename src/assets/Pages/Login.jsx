@@ -17,7 +17,7 @@ const Login = () => {
           />
         </div>
         <div className="flex flex-col w-80 md:w-[220px]">
-          <label htmlFor="Password" className="text-xs">
+          <label htmlFor="Password" className="text-sm">
             Password
           </label>
           <input
@@ -27,12 +27,16 @@ const Login = () => {
           />
         </div>
       </div>
-      <button className="bg-black text-white w-80 h-11 mt-6 md:w-20 md:h-9 md:text-[8px] text-sm hover:bg-gray-700 mx-auto block">
+      <button className="bg-black text-white w-80 h-11 mt-6 md:w-20 md:h-9 md:text-[11px] text-sm hover:bg-gray-700 mx-auto block">
         Sign In
       </button>
-      <div className="flex flex-col justify-center text-[12px] md:text-[9px] items-center mt-7 md:mt-5 gap-1 mt-10px">
-        <Link to="/signup">Sign Up</Link>
-        <Link to="/passwordrecovery">Recover Passwod</Link>
+      <div className="flex flex-col justify-center text-[12px] md:text-[13px] items-center mt-7 md:mt-5 gap-1 mt-10px mb-20">
+        <Link to="/signup" className="hover:text-yellow-500">
+          Sign Up
+        </Link>
+        <Link to="/passwordrecovery" className="hover:text-yellow-500">
+          Recover Passwod
+        </Link>
       </div>
     </div>
   );
