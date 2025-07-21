@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,9 @@ const Signup = () => {
     console.log("Form Data:", formData);
     // Add validation or API call here
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="mt-24">

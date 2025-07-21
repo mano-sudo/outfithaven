@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
+import { useEffect } from "react";
 
 const images = [
   `${import.meta.env.BASE_URL}images/nike.jpg`,
@@ -18,6 +19,10 @@ const ImageSlider = () => {
   const nextSlide = () => {
     setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div

@@ -1,15 +1,24 @@
 import React, { useState } from "react";
+import { RxCross2 } from "react-icons/rx";
+import { FiMinus } from "react-icons/fi";
 
 const Cart = () => {
-  // Simulated cart state: an array of items. Set to empty to test empty cart.
-  const [cartItems, setCartItems] = useState([]); // Try with 1 item to test full cart
+  const [cartItems, setCartItems] = useState([
+    {
+      name: "Nike Airmax 95",
+      size: "42 US",
+      price: 9300.0,
+      quantity: 1,
+      image: `${import.meta.env.BASE_URL}images/nike-95-black.png`,
+    },
+  ]);
 
   return (
     <div className="max-w-xl mx-auto mt-24 p-4 text-center">
       <h1 className="font-bold text-xl mb-2">Your Shopping Cart</h1>
 
       {cartItems.length === 0 ? (
-        // Empty cart view
+        //empty cart view
         <>
           <p className="text-sm mb-6">
             It appears that your cart is currently empty!
@@ -25,7 +34,7 @@ const Cart = () => {
             Total Items ({cartItems.length})
           </p>
 
-          {/* Map through cart items */}
+          {/*Map items from cart */}
           {cartItems.map((item, index) => (
             <div key={index} className="border-t pt-4 mt-4">
               <div className="flex items-center justify-between">
@@ -33,20 +42,22 @@ const Cart = () => {
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-16 h-16 object-cover mr-4"
+                    className="w-24 h-16 object-cover mr-4"
                   />
                   <div>
                     <h2 className="font-bold">{item.name}</h2>
-                    <p className="text-sm">{item.size}</p>
+                    <p className="text-sm">Size: {item.size}</p>
                     <p className="text-sm">₱{item.price}</p>
                   </div>
                 </div>
-                <button className="text-xl font-light">×</button>
+                <button className="text-xl font-light">
+                  <RxCross2 />
+                </button>
               </div>
               <div className="flex justify-between items-center mt-4">
                 <p className="text-lg font-medium">₱{item.price}</p>
-                <div className="flex items-center border px-2 py-1">
-                  <button className="px-2">−</button>
+                <div className="flex items-center border px-2 pt-1">
+                  <button className="px-2">-</button>
                   <span className="px-2">{item.quantity}</span>
                   <button className="px-2">+</button>
                 </div>
@@ -54,7 +65,7 @@ const Cart = () => {
             </div>
           ))}
 
-          {/* Subtotal and Buttons */}
+          {/*Subtotal and Buttons */}
           <div className="border-t mt-6 pt-4">
             <div className="flex justify-between text-lg font-medium">
               <span>Subtotal:</span>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const collections = [
   {
@@ -35,6 +36,9 @@ const collections = [
 ];
 
 const Shop = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="pt-36 px-4">
       <h1 className="text-2xl font-bold text-center">Collections</h1>

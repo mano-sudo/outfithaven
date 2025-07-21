@@ -1,6 +1,10 @@
 import React from "react";
+import { useEffect } from "react";
 
 const HowToOrder = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="flex flex-col justify-center pt-24 px-7 md:px-28">
       <h1 className="text-2xl font-bold text-gray-800 mb-1 text-center">

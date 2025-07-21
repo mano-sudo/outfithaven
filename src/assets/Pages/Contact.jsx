@@ -1,8 +1,9 @@
 import React from "react";
-import { AiOutlineMail } from "react-icons/ai";
-import { IoIosArrowForward } from "react-icons/io";
-
+import { useEffect } from "react";
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="flex flex-col items-center pt-24 ">
       <div className="w-[330px] h-[400px] max-w-4xl md:w-[800px] md:h-[450px] relative">

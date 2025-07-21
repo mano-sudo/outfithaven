@@ -76,14 +76,15 @@ const Products = () => {
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {mockProducts.map((product) => (
-          <div
-            key={product.id}
-            className="border rounded-lg shadow-md p-4 hover:shadow-xl transition"
-          >
-            <img src={product.Image} alt={product.name} />
-            <h2 className="text-center">{product.name}</h2>
-            <p className="text-md text-center mt-2">₱{product.price}</p>
-          </div>
+          <Link to={`/product/${product.id}`} key={product.id}>
+            <div className="border rounded-lg shadow-md p-4 hover:shadow-xl transition">
+              <img src={product.Image} alt={product.name} />
+              <h2 className="text-center">{product.name}</h2>
+              <p className="text-md text-center mt-2">
+                ₱{product.price.toLocaleString()}
+              </p>
+            </div>
+          </Link>
         ))}
       </div>
       <div className="flex justify-center mb-4">

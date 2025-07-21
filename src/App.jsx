@@ -12,6 +12,7 @@ import Login from "./assets/Pages/Login";
 import Signup from "./assets/Pages/Signup";
 import { mockProducts } from "./assets/Components/MockProducts";
 import Cart from "./assets/Pages/Cart";
+import ProductDetail from "./assets/Pages/ProductDetail";
 
 const App = () => {
   return (
@@ -89,6 +90,16 @@ const App = () => {
                 {""}
                 {}
                 <Cart />
+              </div>
+            }
+          />
+          <Route
+            path="/product/:id"
+            element={
+              <div>
+                {""}
+                {}
+                <ProductDetail />
               </div>
             }
           />
