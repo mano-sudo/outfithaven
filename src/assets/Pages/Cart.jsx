@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { FiMinus } from "react-icons/fi";
+import { useCart } from "./CartContext";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      name: "Nike Airmax 95",
-      size: "42 US",
-      price: 9300.0,
-      quantity: 1,
-      image: `${import.meta.env.BASE_URL}images/nike-95-black.png`,
-    },
-  ]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  const { cartItems, removeFromCart, increaseQuantity, decreaseQuantity } =
+    useCart();
 
   return (
     <div className="max-w-xl mx-auto mt-24 p-4 text-center">
@@ -50,16 +49,29 @@ const Cart = () => {
                     <p className="text-sm">₱{item.price}</p>
                   </div>
                 </div>
-                <button className="text-xl font-light">
+                <button
+                  onClick={() => removeFromCart(index)}
+                  className="text-xl font-light"
+                >
                   <RxCross2 />
                 </button>
               </div>
               <div className="flex justify-between items-center mt-4">
                 <p className="text-lg font-medium">₱{item.price}</p>
                 <div className="flex items-center border px-2 pt-1">
-                  <button className="px-2">-</button>
+                  <button
+                    onClick={() => decreaseQuantity(index)}
+                    className="px-2"
+                  >
+                    -
+                  </button>
                   <span className="px-2">{item.quantity}</span>
-                  <button className="px-2">+</button>
+                  <button
+                    onClick={() => increaseQuantity(index)}
+                    className="px-2"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
             </div>
@@ -81,12 +93,18 @@ const Cart = () => {
               Excluding taxes and shipping
             </p>
             <div className="mt-6">
-              <button className="w-full bg-black text-white py-3 font-bold mb-2">
+              <Link
+                to={"/checkout"}
+                className="w-full bg-black text-white py-3 inline-block text-center font-bold mb-2"
+              >
                 CHECKOUT
-              </button>
-              <button className="w-full border border-black py-3 font-bold">
+              </Link>
+              <Link
+                to="/"
+                className="w-full border border-black py-3 font-bold inline-block text-center"
+              >
                 CONTINUE SHOPPING
-              </button>
+              </Link>
             </div>
           </div>
         </div>

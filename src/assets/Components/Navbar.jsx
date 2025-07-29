@@ -12,8 +12,7 @@ const Navbar = ({ products }) => {
   const [clickedLink, setClickedLink] = useState(null);
 
   const location = useLocation();
-  const isHome =
-    location.pathname === "/" || location.pathname === "/outfithaven";
+  const isHome = location.pathname === "/" || location.pathname === "/";
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -139,7 +138,7 @@ const Navbar = ({ products }) => {
 
       {/* Mobile Menu */}
       <ul
-        className={`fixed top-0 left-0 h-full w-full bg-gray-100 text-black p-6 z-40 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 h-full w-full bg-gray-100 text-black p-6 z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:hidden flex flex-col gap-y-11`}
       >
@@ -153,7 +152,13 @@ const Navbar = ({ products }) => {
           />
 
           {searchTerm && (
-            <div className="absolute left-0 right-0 mt-1 bg-white border border-gray-200 shadow-lg rounded max-h-60 overflow-y-auto z-50">
+            <div
+              className="absolute left-0 right-0 mt-1 bg-white border border-gray-200 shadow-lg rounded max-h-60 overflow-y-auto z-50"
+              style={{
+                zIndex: 9999, // Ensure this element is on top of others
+                pointerEvents: "auto", // Ensure that links can be clicked
+              }}
+            >
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product) => (
                   <Link
@@ -166,7 +171,7 @@ const Navbar = ({ products }) => {
                     className="flex items-center p-2 hover:bg-gray-100 border-b border-gray-100"
                   >
                     <img
-                      src={product.Image}
+                      src={product.images[0]}
                       alt={product.name}
                       className="w-12 h-12 object-contain mr-3"
                     />
@@ -181,6 +186,8 @@ const Navbar = ({ products }) => {
             </div>
           )}
         </div>
+
+        {/* Mobile Menu Links */}
         <li>
           <Link
             to="/"
@@ -239,6 +246,8 @@ const Navbar = ({ products }) => {
           <FaInstagram />
         </li>
       </ul>
+
+      {/* Search Overlay */}
       {showSearchOverlay && (
         <div className="fixed inset-0 bg-white text-black max-h-fit bg-opacity-95 z-50 flex flex-col items-center justify-start pt-20 px-6">
           <button
@@ -261,13 +270,12 @@ const Navbar = ({ products }) => {
                 ? `Results for "${searchTerm}"`
                 : "Start typing to search..."}
             </p>
-            {/* Dummy results - Replace with your search logic */}
             {searchTerm && filteredProducts.length > 0 && (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {filteredProducts.map((product) => (
                   <div key={product.id} className="text-center">
                     <img
-                      src={product.Image}
+                      src={product.images[0]}
                       alt={product.name}
                       className="w-full object-contain"
                     />

@@ -13,6 +13,7 @@ import Signup from "./assets/Pages/Signup";
 import { mockProducts } from "./assets/Components/MockProducts";
 import Cart from "./assets/Pages/Cart";
 import ProductDetail from "./assets/Pages/ProductDetail";
+import CheckOut from "./assets/Pages/CheckOut";
 
 const App = () => {
   return (
@@ -100,6 +101,17 @@ const App = () => {
                 {""}
                 {}
                 <ProductDetail />
+              </div>
+            }
+          />
+
+          <Route
+            path="/checkout"
+            element={
+              <div>
+                {""}
+                {}
+                <CheckOut />
               </div>
             }
           />

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { mockProducts } from "../Components/MockProducts";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Thumbs } from "swiper/modules";
@@ -6,19 +6,61 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/thumbs";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useCart } from "./CartContext";
+
+// Modal Component
+const Modal = ({ onClose, onGoToCart }) => {
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white p-6 rounded shadow-md text-center">
+        <p className="text-lg font-semibold mb-4">Item added to cart!</p>
+        <div className="flex flex-row gap-4">
+          <button
+            onClick={onGoToCart}
+            className="bg-black text-white py-1 px-2 rounded"
+          >
+            Go to Cart
+          </button>
+          <button
+            onClick={onClose}
+            className="bg-transparent border px-2 py-1 border-gray-500 rounded"
+          >
+            Continue Shopping
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const product = mockProducts.find((item) => item.id === parseInt(id));
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedQty, setSelectedQty] = useState(1);
+  const [showModal, setShowModal] = useState(false);
+
+  const product = mockProducts.find((item) => item.id === parseInt(id));
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    if (product && product.sizes.length > 0) {
+      setSelectedSize(product.sizes[0]);
+    }
+  }, [product]);
 
-  if (!product) return <p className="text-center mt-10">Product not found.</p>;
+  const handleAddCart = () => {
+    if (!product) return;
+    addToCart(product, selectedSize, selectedQty);
+    setShowModal(true);
+  };
+
+  if (!product) {
+    return <p className="text-center mt-10">Product not found.</p>;
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-10 mt-16">
@@ -61,10 +103,7 @@ const ProductDetail = () => {
       </div>
 
       {/* Right: Product Info */}
-      <div
-        className="flex flex-col justify-center
-      "
-      >
+      <div className="flex flex-col justify-center">
         <h2 className="text-sm uppercase text-gray-500 mb-1">
           Outfit Haven Apparel
         </h2>
@@ -73,26 +112,39 @@ const ProductDetail = () => {
           ₱{product.price.toLocaleString()}
         </p>
 
-        {/* Size & Quantity (example dropdowns) */}
         <div className="mb-4">
-          <label className="block mb-1 text-sm font-medium">Size</label>
-          <select className="w-32 border border-gray-300 p-2 rounded">
+          <select
+            className="w-32 border border-gray-300 p-2 rounded"
+            value={selectedSize}
+            onChange={(e) => setSelectedSize(e.target.value)}
+          >
             {product.sizes.map((size, index) => (
-              <option key={index}>{size}</option>
+              <option key={index} value={size}>
+                {size}
+              </option>
             ))}
           </select>
         </div>
 
         <div className="mb-4">
           <label className="block mb-1 text-sm font-medium">Qty</label>
-          <select className="w-20 border border-gray-300 p-2 rounded">
+          <select
+            className="w-20 border border-gray-300 p-2 rounded"
+            value={selectedQty}
+            onChange={(e) => setSelectedQty(parseInt(e.target.value))}
+          >
             {[1, 2, 3, 4, 5].map((q) => (
-              <option key={q}>{q}</option>
+              <option key={q} value={q}>
+                {q}
+              </option>
             ))}
           </select>
         </div>
 
-        <button className="border border-black px-6 py-3 mt-2 hover:bg-black hover:text-white transition w-1/2 text-sm">
+        <button
+          onClick={handleAddCart}
+          className="border border-black px-6 py-3 mt-2 hover:bg-black hover:text-white transition w-1/2 text-sm"
+        >
           Add To Cart
         </button>
 
@@ -123,6 +175,14 @@ const ProductDetail = () => {
           </p>
         </div>
       </div>
+
+      {/* Modal */}
+      {showModal && (
+        <Modal
+          onClose={() => setShowModal(false)}
+          onGoToCart={() => navigate("/cart")}
+        />
+      )}
     </div>
   );
 };
